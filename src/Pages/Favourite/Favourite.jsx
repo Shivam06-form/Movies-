@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Keyboard, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../Components/Header';
@@ -9,6 +9,7 @@ import BottomTab from '../../Components/BottomTab';
 import FavCard from '../../Components/FavCard';
 import { FlatList } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Input } from '@rneui/themed';
 
 const { Colors, Height, Width, style2, graidantLoaction, iconSizes_1 } =
   Styles();
@@ -35,7 +36,7 @@ const Favourite = () => {
           showsVerticalScrollIndicator={false}
           data={list}
           renderItem={({ item, key }) => {
-            return <FavCard movie={item} />;
+            return <FavCard coin={item} />;
           }}
         />
       </View>
@@ -47,5 +48,5 @@ const Favourite = () => {
 export default Favourite;
 
 const styles = StyleSheet.create({
-  empty: { color: Colors.Color_Brown, marginTop: (Height / 100) * 25},
+  empty: { color: Colors.Color_Brown, marginTop: (Height / 100) * 25 },
 });

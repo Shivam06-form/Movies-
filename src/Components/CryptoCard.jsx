@@ -6,18 +6,20 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToFav, removeFromFav } from '../../Redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Button } from 'react-native';
 
 const { Colors, Height, Width, style2, graidantLoaction, iconSizes_1 } =
   Styles();
 
-const MovieCard = ({ item }) => {
+const CryptoCard = ({ item }) => {
   const Dispatch = useDispatch();
 
   const navigation = useNavigation();
 
   const movies = useSelector(user => user.Favourite);
 
-  const FilterMovies = movies.list.filter(mo => mo.id === item.id);
+  const FilterMovies = movies.list.filter(mo => mo?.id === item?.id);
+
 
   return (
     <Pressable
@@ -31,7 +33,7 @@ const MovieCard = ({ item }) => {
       ]}
     >
       <View style={[{ ...styles.starContainer }]}>
-        {!FilterMovies[0]?.id && (
+        {!FilterMovies[0] && (
           <Icon
             onPress={async () => {
               Dispatch(addToFav({ item: item }));
@@ -42,7 +44,7 @@ const MovieCard = ({ item }) => {
             color={Colors.Color_Black}
           />
         )}
-        {FilterMovies[0]?.id && (
+        {FilterMovies[0] && (
           <Icon
             onPress={async () => {
               Dispatch(removeFromFav({ id: item.id }));
@@ -55,7 +57,7 @@ const MovieCard = ({ item }) => {
         )}
       </View>
       <Image
-        source={{ uri: item.poster }}
+        source={{ uri: item.image }}
         style={[{ ...styles.image }]}
         resizeMode="cover"
         containerStyle={[]}
@@ -65,7 +67,7 @@ const MovieCard = ({ item }) => {
           {item.title.slice(0, 15)}...
         </Text>
         <Text style={[{ ...style2.text }, { ...styles.text }]}>
-          Rating : {item.rating}
+          price : {item?.price?.toString()}
         </Text>
         <Text
           style={[
@@ -74,14 +76,14 @@ const MovieCard = ({ item }) => {
             { color: Colors.Color_Brown },
           ]}
         >
-          {item.releaseYear}
+          {item?.symbol} ( {item?.exchange})
         </Text>
       </View>
     </Pressable>
   );
 };
 
-export default MovieCard;
+export default CryptoCard;
 
 const styles = StyleSheet.create({
   card: {
@@ -92,7 +94,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: (Width / 100) * 45,
-    height: (Width / 100) * 75,
+    height: (Width / 100) * 78,
     marginBottom: (Height / 100) * 2,
     overflow: 'hidden',
   },

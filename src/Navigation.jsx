@@ -8,10 +8,13 @@ import Details from './Pages/Details/Details';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
 import { addFormLocalStore, addToFav } from '../Redux';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Navigation = () => {
   const Dispatch = useDispatch();
   const Stack = createNativeStackNavigator();
+  const Tab = createBottomTabNavigator();
+
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('Fav');
@@ -34,7 +37,7 @@ const Navigation = () => {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{ title: 'Movies List' }}
+          options={{ title: 'Crypto List' }}
         />
         <Stack.Screen
           name="Details"
@@ -47,6 +50,24 @@ const Navigation = () => {
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
+
+      {/* <Tab.Navigator>
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown: false }}
+        />
+        <Tab.Screen
+          name="Details"
+          component={Details}
+          options={{ headerShown: false }}
+        />
+        <Tab.Screen
+          name="Favourite"
+          component={Favourite}
+          options={{ headerShown: false }}
+        />
+      </Tab.Navigator> */}
     </NavigationContainer>
   );
 };

@@ -15,14 +15,23 @@ const { Colors, Height, Width, style2, graidantLoaction, iconSizes_1 } =
   Styles();
 
 const Details = ({ route }) => {
-  const { title, poster, description, genres, releaseDate, id } = route.params;
+  const {
+    title,
+    image,
+    market_cap,
+    price_change_24h,
+    symbol,
+    id,
+    total_volume,
+  } = route.params;
   const navigation = useNavigation();
   const Dispatch = useDispatch();
+  const crytpList = useSelector(user => user.Favourite);
+
+  const FilterMovies = crytpList.list.filter(mo => mo.id === id);
+
+  console.log(route.params, 'params');
   const movies = useSelector(user => user.Favourite);
-
-  const FilterMovies = movies.list.filter(mo => mo.id === id);
-
-  //   console.log(FilterMovies[0].id, 'id');
 
   return (
     <SafeAreaView style={[{ ...style2.container }]}>
@@ -35,11 +44,11 @@ const Details = ({ route }) => {
         />
         <ScrollView showsVerticalScrollIndicator={false}>
           <Image
-            source={{ uri: poster }}
+            source={{ uri: image }}
             style={[{ ...styles.image }]}
             resizeMode="cover"
           />
-
+          {/* 
           <View style={[{ ...style2.flexBox }]}>
             {genres.map(gn => {
               return (
@@ -57,7 +66,7 @@ const Details = ({ route }) => {
                 </Text>
               );
             })}
-          </View>
+          </View> */}
           <View style={[{ ...styles.details }]}>
             <View style={[{ ...style2.flexBox }]}>
               <Text
@@ -94,10 +103,12 @@ const Details = ({ route }) => {
                 />
               )}
             </View>
+            <Text style={[{ ...style2.text }]}>Symbol : {symbol}</Text>
             <Text style={[{ ...style2.text }]}>
-              Release Date : {releaseDate}
+              Price Change 24h : {Math.floor(price_change_24h)}
             </Text>
-            <Text style={[{ ...style2.text }]}>{description}</Text>
+            <Text style={[{ ...style2.text }]}>Volume : {total_volume}</Text>
+            <Text style={[{ ...style2.text }]}>Market Cap : {market_cap}</Text>
           </View>
         </ScrollView>
       </View>
