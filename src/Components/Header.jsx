@@ -9,7 +9,7 @@ const Header = ({ title, Function }) => {
 
   return (
     <View style={[{ ...style2.flexBox }]}>
-      <Icon
+      <Icon     
         name="arrow-back"
         color={Colors.Color_Black}
         size={iconSizes_1}
