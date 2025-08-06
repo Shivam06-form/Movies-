@@ -7,9 +7,10 @@ const Header = ({ title, Function }) => {
   const { Colors, Height, Width, style2, graidantLoaction, iconSizes_1 } =
     Styles();
 
+  console.log('new App');
   return (
     <View style={[{ ...style2.flexBox }]}>
-      <Icon     
+      <Icon
         name="arrow-back"
         color={Colors.Color_Black}
         size={iconSizes_1}
